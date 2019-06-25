@@ -12,6 +12,15 @@ new Vue({
 			this.gameRunning=true;
 		},
 		attack:function () {
+			this.monsterHealth -=this.findDamage(10,3);
+			if (this.checkWin()) {
+				return;
+			}
+
+			this.monsterAttacks();
+			// this.playerHealth -=this.findDamage(12,5);
+			// this.checkWin();
+			// From Step by step
 			// var max = 10;
 			// var min =3;
 			// var damage = Math.max(Math.floor(Math.random() * max)+1,min); -- Other Ways
@@ -34,19 +43,25 @@ new Vue({
 			// 	alert('You Lost!');
 			// 	this.gameRunning = false;
 			// }
-			this.monsterHealth -=this.findDamage(10,3);
+		},
+		specialAttack: function () {
+			this.monsterHealth -=this.findDamage(10,20);
 			if (this.checkWin()) {
 				return;
 			}
-			this.playerHealth -=this.findDamage(12,5);
-			this.checkWin();
+
+			this.monsterAttacks();
 
 		},
-		specialAttack: function () {
-			// body...
-		},
 		Heal:function () {
-			// body...
+			if(this.playerHealth <= 90)
+			{
+				this.playerHealth +=10;
+			}
+			else{
+				this.playerHealth = 100;
+			}
+			this.monsterAttacks();
 		},
 		giveUp:function() {
 
@@ -78,6 +93,10 @@ new Vue({
 				return true;
 			}
 			return false;
+		},
+		monsterAttacks: function() {
+			this.playerHealth -=this.findDamage(12,5);
+			this.checkWin();
 		}
 	}
 });
