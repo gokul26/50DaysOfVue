@@ -3,20 +3,27 @@ new Vue({
 	data:{
 		playerHealth: 100,
 		monsterHealth: 100,
-		gameRunning: false
+		gameRunning: false,
+		turns:[]
 	},
 	methods:{
 		startNew: function () {
 			this.playerHealth=100;
 			this.monsterHealth=100;
 			this.gameRunning=true;
+			this.turns = [];
 		},
 		attack:function () {
-			this.monsterHealth -=this.findDamage(10,3);
+			var damage = this.findDamage(10,3);
+			this.monsterHealth -= damage;
 			if (this.checkWin()) {
 				return;
 			}
-
+			// Logging Turns in array
+			this.turns.unshift({
+				'isPlayer': true,
+				'text' : 'Player hits Monster for ' + damage
+			});
 			this.monsterAttacks();
 			// this.playerHealth -=this.findDamage(12,5);
 			// this.checkWin();
@@ -45,11 +52,16 @@ new Vue({
 			// }
 		},
 		specialAttack: function () {
-			this.monsterHealth -=this.findDamage(10,20);
+			var damage = this.findDamage(10,20);
+			this.monsterHealth -=damage;
 			if (this.checkWin()) {
 				return;
 			}
-
+			// Logging Turns in array
+			this.turns.unshift({
+				'isPlayer': true,
+				'text' : 'Player hits Monster hard for '+damage
+			});
 			this.monsterAttacks();
 
 		},
@@ -61,10 +73,15 @@ new Vue({
 			else{
 				this.playerHealth = 100;
 			}
+			// Logging Turns in array
+			this.turns.unshift({
+				'isPlayer': true,
+				'text' : 'Player Heals for 10'
+			});
 			this.monsterAttacks();
 		},
 		giveUp:function() {
-
+			this.gameRunning = false;
 		},
 		findDamage: function (max, min) {
 			return Math.max(Math.floor(Math.random() * max)+1,min);
@@ -95,8 +112,14 @@ new Vue({
 			return false;
 		},
 		monsterAttacks: function() {
-			this.playerHealth -=this.findDamage(12,5);
+			var damage = this.findDamage(12,5);
+			this.playerHealth -= damage;
 			this.checkWin();
+			// Logging Turns in array
+			this.turns.unshift({
+				'isPlayer': false,
+				'text' :'Monster hits PLayer for ' + damage
+			});
 		}
 	}
 });

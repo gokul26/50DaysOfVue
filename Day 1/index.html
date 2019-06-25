@@ -44,11 +44,18 @@
             <button id="give-up" @click="giveUp">GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="turns.length > 0">
         <div class="small-12 columns">
             <ul>
-                <li>
-
+                <!-- One way to get only MOnsters Logs or Players LOg -->
+                <!-- <li v-for="turn in turns"> 
+                    <template v-if="turn.isPlayer">{{ turn.text}}</template>
+                    <template v-else>{{ turn.text}}</template>
+                    
+                </li> -->
+                <!-- Simpler -->
+                <li v-for="turn in turns" :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}"> 
+                    {{ turn.text}}
                 </li>
             </ul>
         </div>
