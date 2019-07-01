@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue - Calculator</title>
+</head>
+<link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/united/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<body>
+	<div class="container">
+		<div id="app">
+			<div class="col-lg-6 col-md-6 col-xs-6 col-offset-6" id="app">
+				<h3>{{title}}</h3>
+				<div>
+					<div>
+						<input type="text" v-model="calExpressions" placeholder="Your Calculations Goes Here">
+					</div>
+					<div class="well">
+						<button class="btn btn-md btn-primary" @click="getNumber(9)">9</button>
+						<button class="btn btn-md btn-primary" @click="getNumber(8)">8</button>
+						<button class="btn btn-md btn-primary" @click="getNumber(7)">7</button>
+						<button type="button" class="btn btn-warning btn-md" @click="getOperator('+')">Add (+)</button>
+					</div>
+					<div class="well">
+						<button class="btn btn-md btn-primary" @click="getNumber(4)">4</button>
+						<button class="btn btn-md btn-primary" @click="getNumber(5)">5</button>
+						<button class="btn btn-md btn-primary" @click="getNumber(6)">6</button>
+						<button type="button" class="btn btn-warning btn-md" @click="getOperator('-')">Subtract (-)</button>
+					</div>
+					<div class="well">
+						<button class="btn btn-md btn-primary" @click="getNumber(1)">1</button>
+						<button class="btn btn-md btn-primary" @click="getNumber(2)">2</button>
+						<button class="btn btn-md btn-primary" @click="getNumber(3)">3</button>
+						<button type="button" class="btn btn-warning btn-md" @click="getOperator('*')">Multiply (*)</button>
+					</div>
+					<div class="well">
+						<button class="btn btn-md btn-primary" @click="getNumber('dot')">.</button>
+						<button class="btn btn-md btn-primary" @click="getNumber(0)">0</button>
+						<button class="btn btn-md btn-success" @click="getResult()">=</button>
+						<button type="button" class="btn btn-warning btn-md" @click="getOperator('%')">Divide (%)</button>
+					</div>
+					<div class="well">
+						<button class="btn btn-md btn-primary" @click="Reset()">Reset</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="app.js"></script>
+</html>
